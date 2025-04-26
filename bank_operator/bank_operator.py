@@ -17,6 +17,10 @@ def create_user():
 
 
 def list_users():
+    if not users:  # Check if users list is empty
+        print("No users found! Please add a user first.")
+        return
+        
     for i, user in enumerate(users):
         print(f"{i+1}. {user}")
 
