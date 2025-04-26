@@ -17,8 +17,17 @@ def list_users():
         print(f"{i+1}. {user}")
 
 def create_account():
+    if not users:  # Check if users list is empty
+        print("No users found! Please add a user first.")
+        return
+
     list_users()
     idx = int(input("Select user number: ")) - 1
+
+    if idx < 0 or idx >= len(users):  # Ensure the selected index is valid
+        print("Invalid user selection!")
+        return
+
     print("Account Type:")
     print("1. Savings Account")
     print("2. Students Account")
