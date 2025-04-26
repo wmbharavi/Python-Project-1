@@ -57,14 +57,41 @@ def create_account():
     print(f"{account.get_account_type()} added!\n")
 
 def deposit_money():
+    if not users:  # Ensure there are users
+        print("No users found! Please add a user first.")
+        return
+
     list_users()
     idx = int(input("Select user: ")) - 1
+
+    if idx < 0 or idx >= len(users):  # Validate user index
+        print("Invalid user selection!")
+        return
+
     user = users[idx]
+
+    if not user.accounts:  # Ensure the user has accounts
+        print(f"User {user.name} has no accounts! Please create one first.")
+        return
+
     for i, acc in enumerate(user.accounts):
         print(f"{i+1}. Balance: Rs. {acc.get_balance()}")
+
     acc_idx = int(input("Select account: ")) - 1
-    amount = float(input("Enter amount to deposit: "))  # Fixed bug
+
+    if acc_idx < 0 or acc_idx >= len(user.accounts):  # Validate account index
+        print("Invalid account selection!")
+        return
+
+    amount = float(input("Enter amount to deposit: "))
+
+    if amount <= 0:  # Ensure deposit amount is valid
+        print("Deposit amount must be positive!")
+        return
+
     user.accounts[acc_idx].deposit(amount)
+    print(f"Rs. {amount} deposited successfully into account {acc_idx+1}. New balance: Rs. {user.accounts[acc_idx].get_balance()}")
+
 
 def withdraw_money():
     list_users()
