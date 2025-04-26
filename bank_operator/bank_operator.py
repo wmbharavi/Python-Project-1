@@ -110,7 +110,10 @@ def withdraw_money():
 def view_transactions():
     list_users()
     idx = int(input("Select user: ")) - 1
-    user = users[idx]
+    if not users:  # Check if users list is empty
+        print("\n No users found! Please add a user first.")
+        return
+    elif users[idx]:
     for i, acc in enumerate(user.accounts):
         print(f"\n{acc.get_account_type()} {i+1} - Balance: Rs. {acc.get_balance()}")
         for tx in acc.get_transaction_history():
