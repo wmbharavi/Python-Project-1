@@ -19,7 +19,8 @@ class User:
         return "Account"
 
     def is_valid_email(self,email):
-        return None
+        pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'  # Regex pattern for email validation
+        return bool(re.match(pattern, email)) 
 
 
     def __str__(self):
