@@ -1,3 +1,5 @@
+import re
+
 class User:
     def __init__(self, name, email):
         self.name = name
